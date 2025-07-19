@@ -1,0 +1,13 @@
+Tài khoản admin:
+TK:        quochao16012k3@gmail.com
+password:  password
+
+Tài khoản client
+
+TK:        quochao16012k3client@gmail.com
+password:  password
+
+
+
+Backend: Laravel 
+Front-end: Reactjs + typeScrit + tailwind 

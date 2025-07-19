@@ -1,0 +1,54 @@
+<?php 
+namespace App\Http\Controllers\Api\V1\{{namespace}};
+
+use App\Http\Requests\{{namespace}}\{{name}}\StoreRequest;
+use App\Http\Requests\{{namespace}}\{{name}}\UpdateRequest;
+use App\Http\Requests\{{namespace}}\{{name}}\DeleteBulkRequest;
+use App\Traits\Loggable;
+use App\Services\Interfaces\{{namespace}}\{{name}}ServiceInterface as {{name}}Service;
+use App\Http\Resources\{{namespace}}\{{name}}Resource;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Api\V1\BaseController;
+use Illuminate\Http\Request;
+
+class {{name}}Controller extends BaseController{
+
+    protected $service;
+    use Loggable;
+
+    public function __construct({{name}}Service $service)
+    {
+        $this->service = $service;
+        parent::__construct(
+            $service,
+            {{name}}Resource::class
+        );
+    }
+
+    public function index(Request $request){
+        return $this->basePaginate($request);
+    }
+
+    public function store(StoreRequest $request): JsonResponse{
+        return $this->baseSave($request);
+    }
+   
+    public function update(UpdateRequest $request,int $id): JsonResponse{
+        return $this->baseSave($request,$id);
+    }
+
+    public function show(Request $request, ?int $id){
+        return $this->baseShow($id);
+    }
+
+    public function destroy(int $id){
+        return $this->baseDestroy($id);
+    }
+
+    public function bulkDelete(DeleteBulkRequest $request){
+        return $this->baseDeleteBulk($request);
+    }
+
+
+ 
+}

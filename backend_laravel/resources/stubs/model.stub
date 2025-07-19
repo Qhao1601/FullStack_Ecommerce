@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\Query;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class {{name}} extends Model
+{
+    use Query;
+    protected $fillable = [
+       
+        'user_id'
+    ];
+
+   
+
+    public function getRelations(): array{
+        return [''];
+    }
+
+  
+}

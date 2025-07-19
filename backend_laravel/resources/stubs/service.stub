@@ -1,0 +1,46 @@
+<?php
+namespace App\Services\Impl\{{namespace}};
+use App\Services\Interfaces\{{namespace}}\{{name}}ServiceInterface;
+use App\Services\Impl\BaseService;
+use App\Repositories\{{namespace}}\{{name}}Reponsitory;
+use Nette\Utils\Arrays;
+use App\Traits\HasCache;
+use Illuminate\Http\Request;
+use App\Http\Requests\{{namespace}}\{{name}}\DetachPermissionRequest;
+
+class {{name}}Service extends BaseService implements {{name}}ServiceInterface {
+
+    use HasCache;
+    protected $reponsitory;
+    protected $modelData;
+
+    
+    private const CACHE_KEY = '{{snakeName}}s';
+    
+    public function __construct({{name}}Reponsitory $reponsitory)
+    {
+      parent::__construct($reponsitory);
+      $this->cacheKeyPrefix = self::CACHE_KEY;
+    }
+
+
+
+
+    // thêm mới dữ liệu .
+    protected function prepareModelData(Request $request): self{
+      $fillable = $this->reponsitory->getFillable();
+      return $this->initilizeBasicData($request,$fillable);
+    }
+
+
+    protected function initilizeBasicData(request $request, array $fillable = [] ): self{
+      $this->modelData = $request->only($fillable);
+      return $this; 
+    }
+    
+     public function getResource($resource, $type = 'model')
+  {
+    return $type === 'collection' ? {{name}}Resource::collection($resource) : new {{name}}Resource($resource);
+  }
+
+}
